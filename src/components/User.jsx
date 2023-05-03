@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrentUser } from "../redux/slices/usersSlice";
 
+import cn from 'classnames';
+import styles from "../scss/User.module.scss"
+
 export default function User(props) {
 
     const dispatch = useDispatch();
@@ -14,13 +17,16 @@ export default function User(props) {
 
     return (
         <>
-            <li id={props.id}  style={{border: '1px solid black', cursor:'pointer', backgroundColor: currentUser.id === props.id ? "yellow" : ""}}
+            <li className={
+                cn(styles.user,
+                   currentUser.id === props.id && styles.current )
+            } id={props.id}
             onClick={selectUserAsCurrent}>
-                <span>{props.username}</span>
-                <img style={{width: '50px', height: '50px'}}
+                <img className={styles.img}
                     src={props.image} 
                     alt="user-avatar"
                 />
+                <div>{props.username}</div>
             </li>
         </>
     );

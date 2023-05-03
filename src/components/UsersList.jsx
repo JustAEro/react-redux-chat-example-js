@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../redux/slices/usersSlice";
 import User from "./User";
 
-export default function UsersList() {
+import cn from 'classnames';
+import styles from "../scss/UsersList.module.scss";
+
+export default function UsersList({ classname }) {
 
     const dispatch = useDispatch();
+
+    const theme = useSelector(state => state.theme);
+
     const usersList = useSelector(state => state.users.usersList);
     const loadingState = useSelector(state => state.users.loading);
     const error = useSelector(state => state.users.error);
+
 
     useEffect(() => {
         dispatch(getUsers())
@@ -16,6 +23,10 @@ export default function UsersList() {
 
     return (
         <>
+        <div className={cn(
+            classname,
+            styles.root,
+        )}>
             {
                 loadingState === 'loading' 
                 ?
@@ -29,7 +40,7 @@ export default function UsersList() {
                     </>
                 : false
             }
-            <ul>
+            <ul className={cn(styles.ul)}>
                 {usersList.map((user) => 
                     <User 
                         key={user.id} 
@@ -37,6 +48,7 @@ export default function UsersList() {
                     />   
                 )}
             </ul>
+        </div>
         </>
     );
 }

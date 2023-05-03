@@ -25,8 +25,8 @@ export default function SendMessageForm() {
     return (
         <>
             <form onSubmit={handleSendMessage}>
-                <input
-                    type="text"
+                <textarea
+                    name="message-text"
                     value={messageText}
                     placeholder="Enter the message"
                     onChange={(event) => setMessageText(event.target.value)}
