@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../redux/slices/themeSlice';
 import styles from "../scss/ThemeChanger.module.scss"
+import lightTheme from "../assets/light-theme.svg"
+import darkTheme from "../assets/dark-theme.svg"
 
 export default function ThemeChanger({ classname }) {
     const theme = useSelector(state => state.theme)
@@ -20,7 +22,8 @@ export default function ThemeChanger({ classname }) {
 
     return (
         <>
-            <div 
+            <img
+                src={ theme == 'light' ? lightTheme : darkTheme }
                 className={cn(
                     classname,
                     styles.root,
